@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ISS Position</title>
+    <link rel="stylesheet" href="styles/main.css" />
+    <script>
+      document.addEventListener("mousemove", eyeBall);
+      function eyeBall(event) {
+        const eye = document.querySelector(".eye");
+        let x = eye.getBoundingClientRect().left + eye.clientWidth / 2;
+        let y = eye.getBoundingClientRect().top + eye.clientHeight / 2;
+        let radian = Math.atan2(event.clientX - x, event.clientY - y);
+        let rot = radian * (180 / Math.PI) * -1 + 270;
+        eye.style.transform = `rotate(${rot}deg)`;
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Welcome to the ISS Locater</h1>
+    <div class="eye-container">
+      <div class="eye">
+        <div class="pupil"></div>
+      </div>
+    </div>
+    <div class="container">
+      <label for="lat">Latitude</label>
+      <input id="lat" type="text" placeholder="<%= lat %>" name="Latitude" />
+      <label for="lon">Longitude</label>
+      <input id="lon" type="text" placeholder="<%= lon %>" name="Longitude" />
+      <h2>Click the link below to see where it is now on a map</h2>
+      <a
+        href="https://www.google.com/maps/search/?api=1&query=<%= lat %>,<%= lon %>"
+        >Current ISS Location</a
+      >
+    </div>
+  </body>
+</html>
